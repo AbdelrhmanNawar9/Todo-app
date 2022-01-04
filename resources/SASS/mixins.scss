@@ -1,0 +1,5 @@
+@mixin centerChilds($just-cont-value: space-between) {
+  display: flex;
+  justify-content: #{$just-cont-value};
+  align-items: center;
+}

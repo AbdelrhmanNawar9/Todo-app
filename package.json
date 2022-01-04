@@ -1,0 +1,27 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "app to organize tasks ",
+  "main": "index.html",
+  "scripts": {
+    "watch:sass": "node-sass resources/SASS/main.scss resources/CSS/style.css -w ",
+    "devserver": "live-server",
+    "start": "npm-run-all --parallel devserver watch:sass",
+    "compile:sass": "node-sass resources/SASS/main.scss resources/CSS/style.comp.css ",
+    "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' resources/CSS/style.comp.css -o resources/CSS/style.prefix.css",
+    "compress:css": "node-sass resources/CSS/style.prefix.css resources/CSS/style.css --output-style compressed",
+    "build:css": "npm-run-all compile:sass  prefix:css compress:css"
+  },
+  "author": "Abdelrhman Nawar",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "concat": "^1.0.3",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.0.2"
+  },
+  "dependencies": {
+    "node-sass": "^7.0.1"
+  }
+}
