@@ -24,8 +24,9 @@
     />
   </head>
   <body>
-    <div class="container">
-      <!-- <picture class="background-img">
+    <main>
+      <div class="container">
+        <!-- <picture class="background-img">
         <source
           media="(max-width: 392px)"
           srcset="images/bg-mobile-light.jpg"
@@ -41,219 +42,227 @@
         />
       </picture> -->
 
-      <div class="app">
-        <div class="app__header">
-          <h1 class="app__title">TODO</h1>
+        <div class="app">
+          <div class="app__header">
+            <h1 class="app__title">TODO</h1>
 
-          <svg
-            class="icon icon-moon"
-            width="100%"
-            height="auto"
-            viewBox="0 0 26 26"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill="#FFF"
-              fill-rule="evenodd"
-              d="M13 0c.81 0 1.603.074 2.373.216C10.593 1.199 7 5.43 7 10.5 7 16.299 11.701 21 17.5 21c2.996 0 5.7-1.255 7.613-3.268C23.22 22.572 18.51 26 13 26 5.82 26 0 20.18 0 13S5.82 0 13 0z"
-            />
-          </svg>
-        </div>
-
-        <div class="app__to-do app__to-do--create">
-          <div class="checkbox-group">
-            <input
-              type="checkbox"
-              id="checkbox"
-              class="checkbox-input"
-              disabled
-            />
-            <label class="checkbox-label" for="text">
-              <span class="checkbox-button"></span>
-              <input
-                type="text"
-                id="text"
-                class="checkbox-text"
-                placeholder="Create a new todo..."
+            <svg
+              class="icon icon-moon"
+              width="100%"
+              height="auto"
+              viewBox="0 0 26 26"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill="#FFF"
+                fill-rule="evenodd"
+                d="M13 0c.81 0 1.603.074 2.373.216C10.593 1.199 7 5.43 7 10.5 7 16.299 11.701 21 17.5 21c2.996 0 5.7-1.255 7.613-3.268C23.22 22.572 18.51 26 13 26 5.82 26 0 20.18 0 13S5.82 0 13 0z"
               />
-            </label>
+            </svg>
           </div>
+
+          <div class="app__to-do app__to-do--create">
+            <div class="checkbox-group">
+              <input
+                type="checkbox"
+                id="checkbox"
+                class="checkbox-input"
+                disabled
+              />
+              <label class="checkbox-label" for="text">
+                <span class="checkbox-button"></span>
+                <input
+                  type="text"
+                  id="text"
+                  class="checkbox-text"
+                  placeholder="Create a new todo..."
+                />
+              </label>
+            </div>
+          </div>
+
+          <div class="app__display">
+            <div class="app__display__list">
+              <!-- list item  -->
+              <div class="app__to-do active">
+                <div class="checkbox-group">
+                  <input
+                    type="checkbox"
+                    id="1"
+                    checked
+                    class="checkbox-input"
+                  />
+                  <label class="checkbox-label" for="1">
+                    <span class="checkbox-button"></span>
+                    <p class="app__to-do__text checkbox-text">
+                      Complete online
+                    </p>
+                  </label>
+                </div>
+
+                <svg
+                  class="icon icon-cross"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="100%"
+                  height="auto"
+                  viewBox="0 0 18 18"
+                >
+                  <path
+                    fill="#494C6B"
+                    fill-rule="evenodd"
+                    d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+                  />
+                </svg>
+              </div>
+
+              <div class="app__to-do">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="2" class="checkbox-input" />
+                  <label class="checkbox-label" for="2">
+                    <span class="checkbox-button"></span>
+                    <p class="app__to-do__text checkbox-text">
+                      Jog around the park 3x
+                    </p>
+                  </label>
+                </div>
+
+                <svg
+                  class="icon icon-cross"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="100%"
+                  height="auto"
+                  viewBox="0 0 18 18"
+                >
+                  <path
+                    fill="#494C6B"
+                    fill-rule="evenodd"
+                    d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+                  />
+                </svg>
+              </div>
+
+              <div class="app__to-do">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="3" class="checkbox-input" />
+                  <label class="checkbox-label" for="3">
+                    <span class="checkbox-button"></span>
+                    <p class="app__to-do__text checkbox-text">
+                      Jog around the park 3x
+                    </p>
+                  </label>
+                </div>
+
+                <svg
+                  class="icon icon-cross"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="100%"
+                  height="auto"
+                  viewBox="0 0 18 18"
+                >
+                  <path
+                    fill="#494C6B"
+                    fill-rule="evenodd"
+                    d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+                  />
+                </svg>
+              </div>
+
+              <div class="app__to-do">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="4" class="checkbox-input" />
+                  <label class="checkbox-label" for="4">
+                    <span class="checkbox-button"></span>
+                    <p class="app__to-do__text checkbox-text">
+                      Jog around the park 3x
+                    </p>
+                  </label>
+                </div>
+
+                <svg
+                  class="icon icon-cross"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="100%"
+                  height="auto"
+                  viewBox="0 0 18 18"
+                >
+                  <path
+                    fill="#494C6B"
+                    fill-rule="evenodd"
+                    d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+                  />
+                </svg>
+              </div>
+
+              <div class="app__to-do">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="5" class="checkbox-input" />
+                  <label class="checkbox-label" for="5">
+                    <span class="checkbox-button"></span>
+                    <p class="app__to-do__text checkbox-text">
+                      Jog around the park 3x
+                    </p>
+                  </label>
+                </div>
+
+                <svg
+                  class="icon icon-cross"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="100%"
+                  height="auto"
+                  viewBox="0 0 18 18"
+                >
+                  <path
+                    fill="#494C6B"
+                    fill-rule="evenodd"
+                    d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+                  />
+                </svg>
+              </div>
+
+              <div class="app__to-do">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="6" class="checkbox-input" />
+                  <label class="checkbox-label" for="6">
+                    <span class="checkbox-button"></span>
+                    <p class="app__to-do__text checkbox-text">
+                      Jog around the park 3x
+                    </p>
+                  </label>
+                </div>
+
+                <svg
+                  class="icon icon-cross"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="100%"
+                  height="auto"
+                  viewBox="0 0 18 18"
+                >
+                  <path
+                    fill="#494C6B"
+                    fill-rule="evenodd"
+                    d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <div class="app__to-do app__to-do--control">
+              <p class="app__to-do--control__info">5 items left</p>
+
+              <div class="app__to-do--control__sorting">
+                <!-- styling class float-out-->
+                <button class="btn-txt">All</button>
+                <button class="btn-txt">Active</button>
+                <button class="btn-txt">Completed</button>
+              </div>
+
+              <button class="btn-txt">Clear Completed</button>
+            </div>
+          </div>
+
+          <p class="app__tip">Drag and drop to reorder list</p>
         </div>
-
-        <div class="app__display">
-          <div class="app__display__list">
-            <!-- list item  -->
-            <div class="app__to-do active">
-              <div class="checkbox-group">
-                <input type="checkbox" id="1" checked class="checkbox-input" />
-                <label class="checkbox-label" for="1">
-                  <span class="checkbox-button"></span>
-                  <p class="app__to-do__text checkbox-text">Complete online</p>
-                </label>
-              </div>
-
-              <svg
-                class="icon icon-cross"
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="auto"
-                viewBox="0 0 18 18"
-              >
-                <path
-                  fill="#494C6B"
-                  fill-rule="evenodd"
-                  d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-                />
-              </svg>
-            </div>
-
-            <div class="app__to-do">
-              <div class="checkbox-group">
-                <input type="checkbox" id="2" class="checkbox-input" />
-                <label class="checkbox-label" for="2">
-                  <span class="checkbox-button"></span>
-                  <p class="app__to-do__text checkbox-text">
-                    Jog around the park 3x
-                  </p>
-                </label>
-              </div>
-
-              <svg
-                class="icon icon-cross"
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="auto"
-                viewBox="0 0 18 18"
-              >
-                <path
-                  fill="#494C6B"
-                  fill-rule="evenodd"
-                  d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-                />
-              </svg>
-            </div>
-
-            <div class="app__to-do">
-              <div class="checkbox-group">
-                <input type="checkbox" id="3" class="checkbox-input" />
-                <label class="checkbox-label" for="3">
-                  <span class="checkbox-button"></span>
-                  <p class="app__to-do__text checkbox-text">
-                    Jog around the park 3x
-                  </p>
-                </label>
-              </div>
-
-              <svg
-                class="icon icon-cross"
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="auto"
-                viewBox="0 0 18 18"
-              >
-                <path
-                  fill="#494C6B"
-                  fill-rule="evenodd"
-                  d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-                />
-              </svg>
-            </div>
-
-            <div class="app__to-do">
-              <div class="checkbox-group">
-                <input type="checkbox" id="4" class="checkbox-input" />
-                <label class="checkbox-label" for="4">
-                  <span class="checkbox-button"></span>
-                  <p class="app__to-do__text checkbox-text">
-                    Jog around the park 3x
-                  </p>
-                </label>
-              </div>
-
-              <svg
-                class="icon icon-cross"
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="auto"
-                viewBox="0 0 18 18"
-              >
-                <path
-                  fill="#494C6B"
-                  fill-rule="evenodd"
-                  d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-                />
-              </svg>
-            </div>
-
-            <div class="app__to-do">
-              <div class="checkbox-group">
-                <input type="checkbox" id="5" class="checkbox-input" />
-                <label class="checkbox-label" for="5">
-                  <span class="checkbox-button"></span>
-                  <p class="app__to-do__text checkbox-text">
-                    Jog around the park 3x
-                  </p>
-                </label>
-              </div>
-
-              <svg
-                class="icon icon-cross"
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="auto"
-                viewBox="0 0 18 18"
-              >
-                <path
-                  fill="#494C6B"
-                  fill-rule="evenodd"
-                  d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-                />
-              </svg>
-            </div>
-
-            <div class="app__to-do">
-              <div class="checkbox-group">
-                <input type="checkbox" id="6" class="checkbox-input" />
-                <label class="checkbox-label" for="6">
-                  <span class="checkbox-button"></span>
-                  <p class="app__to-do__text checkbox-text">
-                    Jog around the park 3x
-                  </p>
-                </label>
-              </div>
-
-              <svg
-                class="icon icon-cross"
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="auto"
-                viewBox="0 0 18 18"
-              >
-                <path
-                  fill="#494C6B"
-                  fill-rule="evenodd"
-                  d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-                />
-              </svg>
-            </div>
-          </div>
-
-          <div class="app__to-do app__to-do--control">
-            <p class="app__to-do--control__info">5 items left</p>
-
-            <div class="app__to-do--control__sorting">
-              <!-- styling class float-out-->
-              <button class="btn-txt">All</button>
-              <button class="btn-txt">Active</button>
-              <button class="btn-txt">Completed</button>
-            </div>
-
-            <button class="btn-txt">Clear Completed</button>
-          </div>
-        </div>
-
-        <p class="app__tip">Drag and drop to reorder list</p>
       </div>
-    </div>
+    </main>
   </body>
 </html>
