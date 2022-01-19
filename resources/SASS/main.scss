@@ -14,10 +14,10 @@
   // Dark Tsheme
   --Very-Dark-Blue: hsl(235, 21%, 11%);
   --Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
-  --Light-Grayish-Blue: hsl(234, 39%, 85%);
-  --Light-Grayish-Blue: hsl(236, 33%, 92%);
-  --Very-Dark-Grayish-Blue: hsl(233, 14%, 35%);
-  --Very-Dark-Grayish-Blue: hsl(237, 14%, 26%);
+  --Light-Grayish-Blue-dark-theme: hsl(234, 39%, 85%);
+  --Light-Grayish-Blue-hover: hsl(236, 33%, 92%);
+  --Very-Dark-Grayish-Blue-dark-theme: hsl(233, 14%, 35%);
+  --Very-Dark-Grayish-Blue-dark-theme-2: hsl(237, 14%, 26%);
 }
 
 @import "mixins.scss";
@@ -43,13 +43,20 @@ html {
 }
 
 body {
+  transition: all 0.3s;
   font-family: "Josefin Sans", sans-serif;
   font-weight: 400;
   line-height: 1;
   background-color: var(--Very-Light-Gray);
+
+  &.dark-theme {
+    background-color: var(--Very-Dark-Blue);
+  }
 }
 
 .container {
+  transition: all 0.3s;
+
   max-width: 144rem;
   padding: 8rem 0 5rem;
   margin: 0 auto;
@@ -66,6 +73,16 @@ body {
   }
   @media (max-width: 375px) {
     background-image: url("../../images/bg-mobile-light.jpg");
+  }
+}
+
+.dark-theme .container {
+  background-image: url("../../images/bg-desktop-dark.jpg");
+
+  background-color: var(--Very-Dark-Blue);
+
+  @media (max-width: 375px) {
+    background-image: url("../../images/bg-mobile-dark.jpg");
   }
 }
 
@@ -87,11 +104,28 @@ body {
   overflow: hidden;
   fill: currentColor;
   stroke: currentColor;
+  user-select: none;
 }
 
 .icon-moon {
   font-size: 2.6rem;
   stroke: transparent;
+  cursor: pointer;
+}
+
+.dark-theme .icon-moon {
+  display: none;
+}
+
+.icon-sun {
+  font-size: 2.6rem;
+  stroke: transparent;
+  cursor: pointer;
+  display: none;
+}
+
+.dark-theme .icon-sun {
+  display: inline-block;
 }
 
 .icon-cross {
@@ -99,10 +133,14 @@ body {
   color: var(--Light-Grayish-Blue);
   cursor: pointer;
   opacity: 0;
+}
 
-  &:hover {
-    color: var(--bright-blue);
-  }
+.dark-theme .icon-cross {
+  color: var(--Very-Dark-Grayish-Blue-dark-theme);
+}
+
+.icon-cross:hover {
+  color: var(--bright-blue);
 }
 
 .btn-txt {
@@ -111,9 +149,14 @@ body {
   cursor: pointer;
 
   &:hover {
-    color: var(--bright-blue);
+    color: var(--Very-Dark-Grayish-Blue);
   }
 }
+
+.dark-theme .btn-txt:hover {
+  color: var(--Light-Grayish-Blue-hover);
+}
+
 ////////////////// APP ////////////////////////
 .app {
   max-width: 61.6rem;
@@ -145,6 +188,7 @@ body {
     border-radius: 6px;
 
     &__list {
+      transition: all 1s;
       & > :first-child {
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
@@ -157,11 +201,14 @@ body {
   }
 
   &__to-do {
+    transition: all 0.3s;
+
     user-select: none;
     @include centerChilds;
     padding: 2rem 2.3rem;
     background-color: #fff;
     font-size: 1.8rem;
+    cursor: pointer;
 
     @media (max-width: 500px) {
       padding: 2.85rem 2.8rem;
@@ -171,15 +218,22 @@ body {
       opacity: 1;
     }
 
+    &.dragging {
+      opacity: 0.5;
+    }
+
     &--create {
       border-radius: 6px;
       margin-bottom: 2.3rem;
+
       @media (max-width: 500px) {
         padding: 2.5rem 2.8rem;
       }
     }
 
     &--control {
+      transition: all 0.3s;
+
       color: var(--Dark-Grayish-Blue);
       font-size: 1.4rem;
 
@@ -187,6 +241,7 @@ body {
       border-bottom-left-radius: 6px;
 
       position: relative;
+      cursor: default;
 
       @media (max-width: 500px) {
         font-size: 1.8rem;
@@ -204,6 +259,8 @@ body {
       }
 
       &__sorting {
+        transition: background-color 0.3s;
+
         @include centerChilds;
         gap: 2rem;
         color: var(---Very-Dark-Grayish-Blue);
@@ -231,6 +288,10 @@ body {
             font-size: 2.3rem;
           }
         }
+
+        button.current {
+          color: var(--bright-blue);
+        }
       }
     }
   }
@@ -255,27 +316,63 @@ body {
   }
 }
 
-.checkbox-group {
-  display: inline-block;
-  @include centerChilds(start);
-}
-
-.checkbox-label {
-  cursor: pointer;
-
-  @include centerChilds(start);
-
-  &:hover {
-    .checkbox-button {
-      background-image: linear-gradient(
-        to bottom right,
-        hsl(192, 100%, 67%),
-        hsl(280, 87%, 65%)
-      );
+.dark-theme .app {
+  &__display {
+    &__list {
+      & > * {
+        border-bottom: 1px solid var(--Very-Dark-Grayish-Blue-dark-theme-2);
+      }
     }
+  }
+
+  &__to-do {
+    color: var(--Light-Grayish-Blue-dark-theme);
+    background-color: var(--Very-Dark-Desaturated-Blue);
+
+    &--control {
+      color: var(--Very-Dark-Grayish-Blue-dark-theme);
+      // color: var(--Dark-Grayish-Blue);
+
+      &__sorting {
+        background-color: var(--Very-Dark-Desaturated-Blue);
+        color: inherit;
+      }
+    }
+  }
+
+  &__tip {
+    color: var(--Very-Dark-Grayish-Blue-dark-theme);
   }
 }
 
+.checkbox-group {
+  // display: inline-block;
+  // @include centerChilds(start);
+  // flex: 1;
+}
+
+.checkbox-label {
+  // cursor: pointer;
+
+  @include centerChilds(start);
+}
+
+.app__display__list .app__to-do {
+  .checkbox-label {
+    pointer-events: none;
+  }
+  // cursor: pointer;
+
+  &:hover .checkbox-button {
+    background-image: linear-gradient(
+      to bottom right,
+      hsl(192, 100%, 67%),
+      hsl(280, 87%, 65%)
+    );
+  }
+}
+
+//icon before todo text
 .checkbox-button {
   width: 2.4rem;
   height: 2.4rem;
@@ -329,6 +426,24 @@ body {
     z-index: 12;
   }
 }
+
+.dark-theme .checkbox-button {
+  background-image: linear-gradient(
+    to right,
+    var(--Very-Dark-Grayish-Blue-dark-theme-2),
+    var(--Very-Dark-Grayish-Blue-dark-theme-2)
+  );
+  &::before {
+    transition: background-image 3s;
+
+    background-image: linear-gradient(
+      to right,
+      var(--Very-Dark-Desaturated-Blue),
+      var(--Very-Dark-Desaturated-Blue)
+    );
+  }
+}
+
 .checkbox-button + .checkbox-text {
   margin-top: 4px;
 }
@@ -349,6 +464,12 @@ body {
   }
 }
 
+.dark-theme .checkbox-input:checked + .checkbox-label {
+  & .checkbox-text {
+    color: var(--Very-Dark-Grayish-Blue-dark-theme);
+  }
+}
+
 .checkbox-text {
   display: inline-block;
   font-family: inherit;
@@ -360,8 +481,18 @@ input[type="text"] {
   background-color: transparent;
   border: none;
   outline: none;
+  color: inherit;
+
+  caret-color: var(--bright-blue);
 
   &:focus {
     border: none;
   }
+}
+
+.List__message {
+  display: block;
+  text-align: center;
+  font-size: 2rem;
+  cursor: default;
 }

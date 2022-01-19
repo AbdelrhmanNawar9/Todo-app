@@ -22,8 +22,11 @@
       href="images/favicon-32x32.png"
       type="image/png"
     />
+
+    <!-- used defer attribute to make the the script run when DOM is ready -->
+    <script defer src="resources/JS/script.js"></script>
   </head>
-  <body>
+  <body class="dark-theme">
     <main>
       <div class="container">
         <!-- <picture class="background-img">
@@ -49,7 +52,6 @@
             <svg
               class="icon icon-moon"
               width="100%"
-              height="auto"
               viewBox="0 0 26 26"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -57,6 +59,18 @@
                 fill="#FFF"
                 fill-rule="evenodd"
                 d="M13 0c.81 0 1.603.074 2.373.216C10.593 1.199 7 5.43 7 10.5 7 16.299 11.701 21 17.5 21c2.996 0 5.7-1.255 7.613-3.268C23.22 22.572 18.51 26 13 26 5.82 26 0 20.18 0 13S5.82 0 13 0z"
+              />
+            </svg>
+            <svg
+              class="icon icon-sun"
+              width="100%"
+              viewBox="0 0 26 26"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill="#FFF"
+                fill-rule="evenodd"
+                d="M13 21a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-5.657-2.343a1 1 0 010 1.414l-2.121 2.121a1 1 0 01-1.414-1.414l2.12-2.121a1 1 0 011.415 0zm12.728 0l2.121 2.121a1 1 0 01-1.414 1.414l-2.121-2.12a1 1 0 011.414-1.415zM13 8a5 5 0 110 10 5 5 0 010-10zm12 4a1 1 0 110 2h-3a1 1 0 110-2h3zM4 12a1 1 0 110 2H1a1 1 0 110-2h3zm18.192-8.192a1 1 0 010 1.414l-2.12 2.121a1 1 0 01-1.415-1.414l2.121-2.121a1 1 0 011.414 0zm-16.97 0l2.121 2.12A1 1 0 015.93 7.344L3.808 5.222a1 1 0 011.414-1.414zM13 0a1 1 0 011 1v3a1 1 0 11-2 0V1a1 1 0 011-1z"
               />
             </svg>
           </div>
@@ -84,14 +98,9 @@
           <div class="app__display">
             <div class="app__display__list">
               <!-- list item  -->
-              <div class="app__to-do active">
+              <div class="app__to-do" draggable="true">
                 <div class="checkbox-group">
-                  <input
-                    type="checkbox"
-                    id="1"
-                    checked
-                    class="checkbox-input"
-                  />
+                  <input type="checkbox" id="1" class="checkbox-input" />
                   <label class="checkbox-label" for="1">
                     <span class="checkbox-button"></span>
                     <p class="app__to-do__text checkbox-text">
@@ -104,7 +113,6 @@
                   class="icon icon-cross"
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
-                  height="auto"
                   viewBox="0 0 18 18"
                 >
                   <path
@@ -115,7 +123,7 @@
                 </svg>
               </div>
 
-              <div class="app__to-do">
+              <div class="app__to-do" draggable="true">
                 <div class="checkbox-group">
                   <input type="checkbox" id="2" class="checkbox-input" />
                   <label class="checkbox-label" for="2">
@@ -130,7 +138,6 @@
                   class="icon icon-cross"
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
-                  height="auto"
                   viewBox="0 0 18 18"
                 >
                   <path
@@ -141,13 +148,13 @@
                 </svg>
               </div>
 
-              <div class="app__to-do">
+              <div class="app__to-do" draggable="true">
                 <div class="checkbox-group">
                   <input type="checkbox" id="3" class="checkbox-input" />
                   <label class="checkbox-label" for="3">
                     <span class="checkbox-button"></span>
                     <p class="app__to-do__text checkbox-text">
-                      Jog around the park 3x
+                      Jog around the park 5x
                     </p>
                   </label>
                 </div>
@@ -156,7 +163,6 @@
                   class="icon icon-cross"
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
-                  height="auto"
                   viewBox="0 0 18 18"
                 >
                   <path
@@ -167,13 +173,13 @@
                 </svg>
               </div>
 
-              <div class="app__to-do">
+              <div class="app__to-do" draggable="true">
                 <div class="checkbox-group">
                   <input type="checkbox" id="4" class="checkbox-input" />
                   <label class="checkbox-label" for="4">
                     <span class="checkbox-button"></span>
                     <p class="app__to-do__text checkbox-text">
-                      Jog around the park 3x
+                      Jog around the park 7x
                     </p>
                   </label>
                 </div>
@@ -182,7 +188,6 @@
                   class="icon icon-cross"
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
-                  height="auto"
                   viewBox="0 0 18 18"
                 >
                   <path
@@ -193,13 +198,13 @@
                 </svg>
               </div>
 
-              <div class="app__to-do">
+              <div class="app__to-do" draggable="true">
                 <div class="checkbox-group">
                   <input type="checkbox" id="5" class="checkbox-input" />
                   <label class="checkbox-label" for="5">
                     <span class="checkbox-button"></span>
                     <p class="app__to-do__text checkbox-text">
-                      Jog around the park 3x
+                      Jog around the park 9x
                     </p>
                   </label>
                 </div>
@@ -208,7 +213,6 @@
                   class="icon icon-cross"
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
-                  height="auto"
                   viewBox="0 0 18 18"
                 >
                   <path
@@ -219,13 +223,13 @@
                 </svg>
               </div>
 
-              <div class="app__to-do">
+              <div class="app__to-do" draggable="true">
                 <div class="checkbox-group">
                   <input type="checkbox" id="6" class="checkbox-input" />
                   <label class="checkbox-label" for="6">
                     <span class="checkbox-button"></span>
                     <p class="app__to-do__text checkbox-text">
-                      Jog around the park 3x
+                      Jog around the park 1x
                     </p>
                   </label>
                 </div>
@@ -234,7 +238,6 @@
                   class="icon icon-cross"
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
-                  height="auto"
                   viewBox="0 0 18 18"
                 >
                   <path
@@ -251,12 +254,12 @@
 
               <div class="app__to-do--control__sorting">
                 <!-- styling class float-out-->
-                <button class="btn-txt">All</button>
-                <button class="btn-txt">Active</button>
-                <button class="btn-txt">Completed</button>
+                <button class="btn-txt all current">All</button>
+                <button class="btn-txt active">Active</button>
+                <button class="btn-txt completed">Completed</button>
               </div>
 
-              <button class="btn-txt">Clear Completed</button>
+              <button class="btn-txt clear-completed">Clear Completed</button>
             </div>
           </div>
 
