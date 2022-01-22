@@ -1,38 +1,63 @@
 "use strict";
 
-/////////////////////////// Adding new todo
-
 const appListEl = document.querySelector(".app__display__list");
-const newTodoText = document.querySelector("#text");
-let todoCounter = 7;
 
-// local storage
+// getting the list from localstorage
+//(short circuiting with or operator) return the first value if its truthy value and if not then return the second value.
+// first value id from localstorage after converting it to JS object
+let list = JSON.parse(localStorage.getItem("list")) || [];
+
+//view all todos from the list
+function loadTodoFromList() {
+  view(list);
+}
+
+function loadColorsFromLocalstorage() {
+  if (localStorage.getItem("theme") === "light")
+    document.querySelector("body").classList.remove("dark-theme");
+}
+
+//IEFE (Immediatly envoked function expression) (contains things we want to it run once after the the page is loaded )
+(function () {
+  // make todos from the list in the view
+  loadTodoFromList();
+  // load saved theme drom ocal storage
+  loadColorsFromLocalstorage();
+
+  // update the items left status
+  updateStatus();
+})();
+
+/////////////////////////// Adding new todo
+const newTodoText = document.querySelector("#text");
 
 function addTodo() {
-  // add the new todo to the view
-
-  // generate a unique id for the new todo
-  const id = Date.now();
-
-  const newTodo = generateTodoMarkup(id, this.value);
-
   // remove the the empty message if there were not items
-  if (list === null) return;
-
   if (list.length === 0) {
     appListEl.innerHTML = "";
   }
 
-  appListEl.insertAdjacentHTML("beforeend", newTodo);
+  // generate a unique id for the new todo
+  const id = Date.now();
+
+  const newTodoInlist = { id: id, text: this.value, checked: false };
+
+  // add the new todo to the view
+  // only add the new todo to the view if the All filter is active
+  if (
+    !document
+      .querySelector(".app__to-do--control__sorting button:last-child")
+      .classList.contains("current")
+  ) {
+    // appListEl.insertAdjacentHTML("beforeend", newTodo);
+    addTodoToView(newTodoInlist);
+  }
 
   // add the new todo to the list
-  list.push(returnTodoById(id));
+  list.push(newTodoInlist);
 
   //clear the input field
   newTodoText.value = "";
-
-  //add todoHandler to new the new todo
-  returnTodoById(id).addEventListener("click", todoHandler);
 
   //loadDraggables after adding the new todo
   loadDraggables();
@@ -40,35 +65,30 @@ function addTodo() {
   // update the items left status
   updateStatus();
 
+  // save the new list to the local storage
+  setLocalStorage();
 }
 
 // to run the addtodo when input value is commited
 newTodoText.addEventListener("change", addTodo);
 
-/////////////////////delete a todo by id
-
-function removeTodo(id) {
-  // remove the to do from the list
-  const IndexToRemove = list.findIndex(
-    (todo) =>
-      +todo.querySelector("input.checkbox-input").attributes.id.value === id
+function addTodoToView(todo) {
+  appListEl.insertAdjacentHTML(
+    "beforeend",
+    generateTodoMarkup(todo.id, todo.text, todo.checked)
   );
-  list.splice(IndexToRemove, 1);
-
-  // removefrom the view
-  const selectorstring = `input.checkbox-input[id="${id}"]`;
-  appListEl.querySelector(selectorstring)?.closest(".app__to-do").remove();
-
-  updateStatus();
-
+  // add handler to the newly added todo
+  returnTodoById(todo.id).addEventListener("click", todoHandler);
 }
 
-function generateTodoMarkup(id, text) {
+// generate markup for todo
+function generateTodoMarkup(id, text, checked = false) {
   return `<div class="app__to-do " draggable="true" >
   <div class="checkbox-group">
     <input
       type="checkbox"
       id="${id}" 
+      ${checked ? "checked" : ""}
       class="checkbox-input"
     />
     <label class="checkbox-label" for="${id}">
@@ -94,47 +114,61 @@ function generateTodoMarkup(id, text) {
   </div>`;
 }
 
-///////////////////// filter to do
+/////////////////////delete a todo by id
 
-// storing the viewed in list
+function removeTodo(id) {
+  // remove the target todo from the list
+  const IndexToRemove = list.findIndex((todo) => todo.id === id);
+  list.splice(IndexToRemove, 1);
 
+  // remove the target todo from the view
+  returnTodoById(id).remove();
+  //an other solution
+  // const selectorstring = `input.checkbox-input[id="${id}"]`;
+  // appListEl.querySelector(selectorstring)?.closest(".app__to-do").remove();
 
+  //display the empty message if there is no todo in the list after removing the target todo
+  if (list.length === 0) {
+    appListEl.innerHTML = `<p class="List__message app__to-do">There are no items.<P> `;
+  }
 
-let list = [];
+  // update the items left status
+  updateStatus();
 
-function loadTodoInList() {
-  appListEl.querySelectorAll(".app__to-do").forEach((todo) => {
-    list.push(todo);
-    todo.addEventListener("click", todoHandler);
-  });
+  // save the new list to the local storage
+  setLocalStorage();
 }
 
-loadTodoInList();
-
-
-
+// function to restore todos in list after draging and droping the some todos
 function loadTodoInListAfterFilter() {
+  // storing the old list
   const oldList = list;
+  // clear the list
   list = [];
 
   //loading the filteredList from the container in the list
   appListEl.querySelectorAll(".app__to-do").forEach((todo) => {
-    list.push(todo);
-    todo.addEventListener("click", todoHandler);
+    list.push({
+      id: +todo.querySelector("input.checkbox-input").attributes.id.value,
+      text: todo.querySelector(".checkbox-text").innerText,
+      checked: todo.querySelector("input.checkbox-input").checked,
+    });
   });
 
-  oldList.forEach((todo) => {
-    //push the todo to the list if the todo is not in the list
-    if (!list.includes(todo)) {
-      list.push(todo);
+  // adding the rest todo to from the oldList
+  oldList.forEach((oldListTodo) => {
+    //push the oldlisttodo to the list if the oldlisttodo is not in the list
+    if (!list.some((listTodo) => listTodo.id === oldListTodo.id)) {
+      list.push(oldListTodo);
     }
   });
 
+  // save the new list to the local storage
+  setLocalStorage();
 }
 
-updateStatus();
-
 function todoHandler(e) {
+  // for testing
   // console.log("this", this);
   // console.log("e.currentTarget", e.currentTarget);
   // console.log("e.target", e.target);
@@ -151,7 +185,7 @@ function todoHandler(e) {
     return;
   }
 
-  //otherwise check the todo
+  //otherwise toggle check (check or uncheck the todo)
   toggleCheckById(id);
 }
 
@@ -161,83 +195,82 @@ function returnTodoById(id) {
   return appListEl.querySelector(selectorstring).closest(".app__to-do");
 }
 
+// function to toggle check to a todo by its id
+function toggleCheckById(id) {
+  list.forEach((todo) => {
+    if (+todo.id === id)
+      if (todo.checked) {
+        // changing status in the List
+        todo.checked = false;
+        //changing the status in the view
+        returnTodoById(id).querySelector(
+          "input.checkbox-input"
+        ).checked = false;
+      } else {
+        todo.checked = true;
+        returnTodoById(id).querySelector("input.checkbox-input").checked = true;
+      }
+  });
+
+  // update the items left status
+  updateStatus();
+
+  // save the new list to the local storage
+  setLocalStorage();
+}
+
+////////////////////////////////////////////////// buttons
+// function to add a list of todos to the view
 function view(filteredList) {
-  console.log(filteredList);
   if (filteredList === null) return;
   // clear the view
   appListEl.innerHTML = "";
 
   if (filteredList.length === 0) {
     appListEl.innerHTML = `<p class="List__message app__to-do">There are no items.<P> `;
+    return;
   }
 
-  // append fiteredList items to the view
+  // add fiteredList items to the view
   filteredList.forEach((todo) => {
-    appListEl.appendChild(todo);
+    addTodoToView(todo);
   });
 }
 
 function filterComp() {
   const listCompleted = list.filter((todo) => {
-    return todo.querySelector("input.checkbox-input").checked === true;
+    return todo.checked === true;
   });
 
   view(listCompleted);
   updateCurrent("completed");
+  loadDraggables();
 }
 
 function filterActive() {
   const listActive = list.filter((todo) => {
-    return todo.querySelector("input.checkbox-input").checked === false;
+    return todo.checked === false;
   });
-  console.log(listActive);
 
   view(listActive);
   updateCurrent("active");
+  loadDraggables();
 }
 
 function filterAll() {
   view(list);
   updateCurrent("all");
-}
-
-function toggleCheckById(id) {
-  console.log("toggle");
-  list.forEach((todo) => {
-    if (+todo.querySelector("input.checkbox-input").attributes.id.value === id)
-      todo.querySelector("input.checkbox-input").checked
-        ? (todo.querySelector("input.checkbox-input").checked = false)
-        : (todo.querySelector("input.checkbox-input").checked = true);
-  });
-
-  updateStatus();
+  loadDraggables();
 }
 
 function clearCompleted() {
-  // let idListToRemoved = [];
-  // list.forEach((todo) => {
-  //   if (todo.querySelector("input.checkbox-input").checked) {
-
-  //     const id = +todo.querySelector("input.checkbox-input").attributes.id
-  //       .value;
-  //     idListToRemoved.push(id);
-
-  //     // todo.remove();
-  //   }
-  // });
-
-  // idListToRemoved.forEach((id) => removeTodo(id));
-
   const listCompleted = list.filter((todo) => {
-    return todo.querySelector("input.checkbox-input").checked === true;
+    return todo.checked === true;
   });
 
   listCompleted.forEach((todo) => {
-    const id = +todo.querySelector("input.checkbox-input").attributes.id.value;
-    removeTodo(id);
+    removeTodo(todo.id);
   });
-
-  console.log(list);
 
   // display the empty message if there are no items
   if (list.length === 0) view([]);
@@ -253,12 +286,10 @@ btnActive.addEventListener("click", filterActive);
 btnAll.addEventListener("click", filterAll);
 btnclearComp.addEventListener("click", clearCompleted);
 
-// update items left status
+// function to update items left status
 function updateStatus() {
-  if (list === null) return;
-
   const listActive = list.filter((todo) => {
-    return todo.querySelector("input.checkbox-input").checked === false;
+    return todo.checked === false;
   });
 
   document.querySelector(
@@ -273,17 +304,8 @@ document.querySelector(".app__to-do--create").addEventListener("click", (e) => {
   input.select();
 });
 
-//*********************************************** */
-//Development functions
-
-function showStatus() {
-  list.forEach((todo, i) =>
-    console.log(`${i + 1}`, todo.querySelector("input.checkbox-input").checked)
-  );
-}
-
-////////Dark Theme
-// Select the button
+//////////Dark Theme
+// Select the theme button
 const btnSwitchTheme = document.querySelectorAll(".app__header .icon");
 
 // Listen for a click on the button
@@ -291,25 +313,26 @@ btnSwitchTheme.forEach((btn) =>
   btn.addEventListener("click", function () {
     // Then toggle (add/remove) the .dark-theme class to the body
     document.body.classList.toggle("dark-theme");
+
+    //store a reference value for the theme in the localstorage
+    setColorsInLocalStorage();
   })
 );
 
-/// to mark the current view
-
+/// to mark the btn for the current view active
 function updateCurrent(btnToBeCurrent) {
   document
     .querySelectorAll(".app__to-do--control__sorting button ")
     .forEach((btn) => {
       //reset all btns
-
       btn.classList.remove("current");
 
+      // activate the btn that contains (all or active or completed ) class
       if (btn.classList.contains(btnToBeCurrent)) btn.classList.add("current");
     });
 }
 
 ////// Drag and Drop Feature
-
 function loadDraggables() {
   const draggables = appListEl.querySelectorAll(".app__to-do");
 
@@ -374,4 +397,17 @@ function GetDragAfterElement(container, y) {
       offset: Number.NEGATIVE_INFINITY,
     }
   ).element;
+}
+
+// local storage
+// set list in localStorage
+function setLocalStorage() {
+  window.localStorage.setItem("list", JSON.stringify(list));
+}
+
+// set theme in localStorage
+function setColorsInLocalStorage() {
+  document.querySelector("body").classList.contains("dark-theme")
+    ? window.localStorage.setItem("theme", "dark")
+    : window.localStorage.setItem("theme", "light");
 }
