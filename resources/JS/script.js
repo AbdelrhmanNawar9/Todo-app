@@ -128,7 +128,7 @@ function removeTodo(id) {
   // appListEl.querySelector(selectorstring)?.closest(".app__to-do").remove();
 
   //display the empty message if there is no todo in the list after removing the target todo
-  if (list.length === 0) {
+  if (appListEl.querySelectorAll(".app__to-do").length === 0) {
     appListEl.innerHTML = `<p class="List__message app__to-do">There are no items.<P> `;
   }
 
