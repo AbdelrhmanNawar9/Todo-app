@@ -177,7 +177,6 @@ function todoHandler(e) {
   const id = +e.target
     .closest(".app__to-do")
     .querySelector("input.checkbox-input").attributes.id.value;
-  console.log(id);
 
   // remove todo if the target was the cross and don't continue the todoHandler function
   if (e.target.closest(".icon-cross")) {
@@ -382,9 +381,7 @@ function GetDragAfterElement(container, y) {
   return draggableElements.reduce(
     (closest, child) => {
       const box = child.getBoundingClientRect();
-      // console.log(box);
       const offset = y - box.top - box.height / 2;
-      // console.log(offset);
 
       if (offset < 0 && offset > closest.offset) {
         return { offset: offset, element: child };
