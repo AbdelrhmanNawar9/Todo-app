@@ -345,10 +345,16 @@ body {
   }
 }
 
+.checkbox-group {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+
 .checkbox-label {
   // cursor: pointer;
 
   @include centerChilds(start);
+  overflow-wrap: anywhere;
 }
 
 .app__display__list .app__to-do {
@@ -440,6 +446,7 @@ body {
 
 .checkbox-button + .checkbox-text {
   margin-top: 4px;
+  flex: 1;
 }
 
 .checkbox-input {

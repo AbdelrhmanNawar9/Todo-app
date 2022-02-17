@@ -23,10 +23,10 @@
       type="image/png"
     />
 
-    <!-- used defer attribute to make the the script run when DOM is ready -->
-    <script defer src="resources/JS/script.js"></script>
+    <!--  defer attribute to make the the script run when DOM is ready -->
+    <script defer src="resources/JS/controller.js" type="module"></script>
   </head>
-  <body class="dark-theme">
+  <body>
     <main>
       <div class="container">
         <!-- <picture class="background-img">
@@ -97,6 +97,9 @@
 
           <div class="app__display">
             <div class="app__display__list">
+              <p class="List__message app__to-do">
+                Type a todo then press Enter to add it.
+              </p>
               <!-- list item  -->
               <!-- <div class="app__to-do" draggable="true">
                 <div class="checkbox-group">

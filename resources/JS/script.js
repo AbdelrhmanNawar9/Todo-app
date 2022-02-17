@@ -139,7 +139,7 @@ function removeTodo(id) {
   setLocalStorage();
 }
 
-// function to restore todos in list after draging and droping the some todos
+// function to restore todos in list after draging and droping some todos
 function loadTodoInListAfterFilter() {
   // storing the old list
   const oldList = list;
