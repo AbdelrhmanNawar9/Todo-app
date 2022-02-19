@@ -1,7 +1,38 @@
 import settings from "./settings.js";
 
 export const state = {
-  list: [],
+  list: [
+    {
+      text: "Complete online JavaScript course",
+      checked: true,
+      id: 1645299429921,
+    },
+    {
+      text: "Jog around the park 3x",
+      checked: false,
+      id: 1645299442426,
+    },
+    {
+      text: "10 minutes meditation",
+      checked: false,
+      id: 1645299448295,
+    },
+    {
+      text: "Read for 1 hour",
+      checked: false,
+      id: 1645299455827,
+    },
+    {
+      text: "Pick up groceries",
+      checked: false,
+      id: 1645299471138,
+    },
+    {
+      text: "Complete Todo App on Frontend Mentor",
+      checked: false,
+      id: 1645299500430,
+    },
+  ],
   theme: settings.defaultTheme,
 };
 
@@ -60,7 +91,7 @@ export function setTheme(currnetTheme) {
 }
 //load from local storage
 export function loadFromLocalStorage() {
-  state.list = JSON.parse(localStorage.getItem("list")) || [];
+  state.list = JSON.parse(localStorage.getItem("list")) || state.list || [];
 
   // only set the theme in state if not null
   localStorage.getItem("theme")
