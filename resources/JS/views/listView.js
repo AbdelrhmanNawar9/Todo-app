@@ -4,10 +4,10 @@ class ListView {
   #parentElement = document.querySelector(".app__display__list");
 
   constructor() {
-    // to make this in the handler point to the ListView instance not to #dragoverHandler method
+    // to make this in the handler point to the ListView instance not to dragoverHandler method
     this.#parentElement.addEventListener(
       "dragover",
-      this.#dragoverHandler.bind(this)
+      this.dragoverHandler.bind(this)
     );
   }
 
@@ -16,7 +16,7 @@ class ListView {
     if (this.#parentElement.querySelectorAll(".List__message").length !== 0) {
       this.clear();
     }
-    const todoHTML = this.#generateMarkup(todo);
+    const todoHTML = this.generateMarkup(todo);
     this.#parentElement.insertAdjacentHTML("beforeend", todoHTML);
     this.loadDraggables();
   }
@@ -25,7 +25,7 @@ class ListView {
     this.#parentElement.innerHTML = "";
   }
 
-  #generateMarkup(todo) {
+  generateMarkup(todo) {
     return todoPreview.generateMarkup(todo);
   }
 
@@ -56,7 +56,7 @@ class ListView {
     });
   }
 
-  #returnTodoById(id) {
+  returnTodoById(id) {
     const selectorstring = `input.checkbox-input[id="${id}"]`;
     return this.#parentElement
       .querySelector(selectorstring)
@@ -64,14 +64,14 @@ class ListView {
   }
 
   removeTodo(id) {
-    this.#returnTodoById(id).remove();
+    this.returnTodoById(id).remove();
 
     if (this.#parentElement.querySelectorAll(".app__to-do").length === 0)
       this.displayMessage();
   }
 
   toggledCheckedById(id) {
-    const todo = this.#returnTodoById(id);
+    const todo = this.returnTodoById(id);
     if (todo.querySelector("input.checkbox-input").checked) {
       todo.querySelector("input.checkbox-input").checked = false;
     } else {
@@ -102,7 +102,7 @@ class ListView {
     this.#parentElement.addEventListener("dragend", handler);
   }
 
-  #getDragAfterElement(container, y) {
+  getDragAfterElement(container, y) {
     // select all the draggable elements except the dragged element
     const draggableElements = [
       ...container.querySelectorAll(".app__to-do:not(.dragging)"),
@@ -126,9 +126,9 @@ class ListView {
       }
     ).element;
   }
-  #dragoverHandler(e) {
+  dragoverHandler(e) {
     e.preventDefault();
-    const afterElement = this.#getDragAfterElement(
+    const afterElement = this.getDragAfterElement(
       this.#parentElement,
       e.clientY
     );
@@ -152,11 +152,11 @@ class ListView {
     //loading the filteredList from the container in the list
 
     return [...this.currentDOMList].map((todo) =>
-      this.#convertDOMTodoToObj(todo)
+      this.convertDOMTodoToObj(todo)
     );
   }
 
-  #convertDOMTodoToObj(todo) {
+  convertDOMTodoToObj(todo) {
     return {
       id: +todo.querySelector("input.checkbox-input").attributes.id.value,
       text: todo.querySelector(".checkbox-text").innerText,

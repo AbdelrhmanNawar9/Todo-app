@@ -5,7 +5,7 @@ class AddTodo {
     const input = this.#parentElement.value;
     // capitalize the first letter
     const text = input.charAt(0).toUpperCase() + input.slice(1);
-    this.#clear();
+    this.clear();
     return text;
   }
 
@@ -15,8 +15,10 @@ class AddTodo {
   }
 
   // clear the the input field
-  #clear() {
+  // prettier-ignore
+  clear(){
     this.#parentElement.value = "";
+    
   }
 }
 

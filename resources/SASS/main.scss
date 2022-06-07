@@ -153,6 +153,10 @@ body {
   }
 }
 
+button:focus {
+  outline: none;
+}
+
 .dark-theme .btn-txt:hover {
   color: var(--Light-Grayish-Blue-hover);
 }
@@ -287,6 +291,10 @@ body {
             margin-top: 10rem;
             font-size: 2.3rem;
           }
+        }
+
+        button {
+          margin: 0 3px;
         }
 
         button.current {
